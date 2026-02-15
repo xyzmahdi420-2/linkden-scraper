@@ -6,14 +6,16 @@ Scrapes LinkedIn profiles with full experience data
 import re
 import json
 import html
+import asyncio
+import warnings
 from typing import Dict, List, Optional, Set, Tuple
 from datetime import datetime
-import warnings
-import asyncio
 
 import requests
 from requests import Session
 from bs4 import BeautifulSoup
+
+# Import Actor from apify (already installed in base image)
 from apify import Actor
 
 warnings.filterwarnings("ignore")
@@ -54,6 +56,10 @@ PROFILES_ID = 'a1a483e719b20537a256b6853cdca711'
 BLOCKED_DOMAINS = ('linkedin.com', 'media.licdn.com')
 
 
+# ============================================================================
+# UTILITY FUNCTIONS
+# ============================================================================
+
 def format_cookies(cookie_string: str) -> Dict[str, str]:
     """Convert cookie string to dictionary."""
     cookies = {}
@@ -93,6 +99,10 @@ def parse_date(text: str) -> Dict:
     return result
 
 
+# ============================================================================
+# MAIN SCRAPER CLASS
+# ============================================================================
+
 class LinkedInProfileScraper:
     """LinkedIn profile scraper."""
     
@@ -114,7 +124,6 @@ class LinkedInProfileScraper:
             'x-restli-protocol-version': '2.0.0',
         }
         
-        self._contact_info = None
         self._decoded_html = None
         self.fsd_profile = None
     
@@ -345,6 +354,10 @@ class LinkedInProfileScraper:
         }
 
 
+# ============================================================================
+# APIFY ACTOR MAIN FUNCTION
+# ============================================================================
+
 async def main():
     """Apify actor entry point."""
     async with Actor:
@@ -360,7 +373,7 @@ async def main():
             await Actor.fail('No profiles specified.')
             return
         
-        await Actor.log.info(f'Starting scrape for {len(profiles)} profile(s)')
+        Actor.log.info(f'Starting scrape for {len(profiles)} profile(s)')
         
         for idx, profile_input in enumerate(profiles, 1):
             if isinstance(profile_input, str):
@@ -368,14 +381,14 @@ async def main():
             elif isinstance(profile_input, dict):
                 username = profile_input.get('username') or profile_input.get('url', '').split('/in/')[-1].strip('/')
             else:
-                await Actor.log.warning(f'Invalid profile at index {idx}')
+                Actor.log.warning(f'Invalid profile at index {idx}')
                 continue
             
             username = username.strip().rstrip('/')
             if '/in/' in username:
                 username = username.split('/in/')[-1].strip('/')
             
-            await Actor.log.info(f'[{idx}/{len(profiles)}] Scraping: {username}')
+            Actor.log.info(f'[{idx}/{len(profiles)}] Scraping: {username}')
             
             try:
                 scraper = LinkedInProfileScraper(username, cookies)
@@ -383,10 +396,10 @@ async def main():
                 profile_data['scraped_at'] = datetime.utcnow().isoformat()
                 profile_data['scrape_status'] = 'success'
                 await Actor.push_data(profile_data)
-                await Actor.log.info(f'✓ Success: {username}')
+                Actor.log.info(f'✓ Success: {username}')
             except Exception as e:
                 error_msg = f'Error: {username}: {str(e)}'
-                await Actor.log.error(error_msg)
+                Actor.log.error(error_msg)
                 await Actor.push_data({
                     'username': username,
                     'scrape_status': 'failed',
@@ -394,4 +407,4 @@ async def main():
                     'scraped_at': datetime.utcnow().isoformat()
                 })
         
-        await Actor.log.info('Scraping completed!')
+        Actor.log.info('Scraping completed!')
