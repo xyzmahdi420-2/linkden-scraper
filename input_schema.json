@@ -1,0 +1,35 @@
+{
+  "title": "LinkedIn Profile Scraper Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "profiles": {
+      "title": "LinkedIn Profiles",
+      "type": "array",
+      "description": "List of LinkedIn profile URLs or usernames to scrape",
+      "editor": "stringList",
+      "placeholderValue": "williamhgates",
+      "prefill": [
+        "williamhgates",
+        "satyanadella"
+      ],
+      "example": [
+        "williamhgates",
+        "satyanadella",
+        "https://linkedin.com/in/jeff-weiner"
+      ]
+    },
+    "cookies": {
+      "title": "LinkedIn Session Cookies",
+      "type": "string",
+      "description": "Your LinkedIn session cookies. Required for authentication. Get these from your browser's developer tools (Application > Cookies). Include li_at and JSESSIONID at minimum.",
+      "editor": "textfield",
+      "isSecret": true,
+      "example": "li_sugr=7348712c-9a42-41dd-a729-9a5804d9ccb6; bcookie='v=2&d2816cc2-dd9e-4bf4-858b-2e1788609db3'; bscookie='v=1&202511180659209a02b0ed-c49a-4397-8a58-ce23c3491a72AQHPECPsY1sD361pirTJaM4MJ_Vl7X0n'; li_gc=MTswOzE3NjU4MjA5OTU7MjswMjH6+tAGXFV3q+UQuJJwElK6gQymKe09njvdTHBhnQ5T6w==; li_rm=AQG8oT1EFjRNwwAAAZs15xP02yOk-WgFtwIl7-NCnag6UH2X2QwniJs9mZNSmb_T6cG8bmWdFVsJAXHYUG51rdV-lU0qa8eIhnbzbo9_xWTh_SLnSSrULsdS; JSESSIONID='ajax:6743718318432579422'; li_theme=light; li_theme_set=app; _guid=14cae7b6-d3e2-4b98-ba2f-e4ffcfa90d5a; dfpfpt=1d9e39af48754befb3fe1a387f686d29; AnalyticsSyncHistory=AQJfmIF6OrV-vQAAAZxddPo5jAHPFTt5ghROjUHIOmh6TkfOiJ2KKEpGGCAflkJnZsbG27-LUZPXLl05pb71wA; g_state={'i_l':0}; lang=v=2&lang=en-us; liap=true; li_at=AQEDAV_ElYwEVBBPAAABnGArpJ0AAAGchDgonU0AwHDqbfrOOMUonGSY20ht4SCVCkdGuHxV2b5274Or2bqWFNCiB4p5805XoCndJ3mHAOPwV81M_G4HZxIFhQQPhVsAkG6ro-0ZzPgDnCUrKCJKwuJ1; sdui_ver=sdui-flagship:0.1.27657+SduiFlagship0; timezone=Asia/Dhaka; fptctx2=taBcrIH61PuCVH7eNCyH0FFaWZWIHTJWSYlBtG47cVvx4mn5Ze8nwAMI3sr%252b6epxEnFdDadVrtc7Vi6jMirAPZWkOcXkleGfMTkTxcWYiP9ruoLGnxZl3s0wQbTvAwaWDOXqa3FjkQO7h4XqHv2wiQRdHFHde84geGZIWleo%252ft%252b99czvvaAyb9ChtdY8AFTN7shDgFJ4HciOYUGmd%252fOI5w5qrotNnFOHIYX7HlZK9XhH9pKigsbfnnXDCbPPyoLUpJ4oZKg2yRXd2g8QfKpntPJMPh4uhWUQnRbzdyxSNfMPMw5aKQtC%252fSpq1YYxYQvmdomaZ%252bw%252biYZpUJNl0c0ZoeqpLRmmuReV7A2e%252bVHkXUc%253d; __cf_bm=3U5i4NbpaMB.MUl0T1eERo4ZgQm115E0phDS8GMz.uA-1771140031-1.0.1.1-DuIA3gAJhvsS2lvtiYXNszk4vOb4u_uHV9ySIzQdGaBMEqGLiPE29IseWQrccCtJJiHwKdkQEahIgHx9WJvOXypm5BkW0OG3hbvsYqeA58g; UserMatchHistory=AQIabLGzmc9TCwAAAZxgLXR8BdjvUjNKGyOrUkqpU6K67HuzKobuN0UCC-Y5zoB6iV4yPqOS_cgndw; lms_ads=AQGhO11nXEZaDgAAAZxgLXW1zB7pgJhb0rowoChvRnbfQPd0hRxyCXPJEzaovEYIzhcdZ4jtGRztDi_7wnBPBWeFUDGcIcd2; lms_analytics=AQGhO11nXEZaDgAAAZxgLXW1zB7pgJhb0rowoChvRnbfQPd0hRxyCXPJEzaovEYIzhcdZ4jtGRztDi_7wnBPBWeFUDGcIcd2; lidc='b=OB60:s=O:r=O:a=O:p=O:g=3736:u=4:x=1:i=1771140118:t=1771177244:v=2:sig=AQHjimxgfWUOmv0cGJWwacT6gXeObG0n'"
+    }
+  },
+  "required": [
+    "profiles",
+    "cookies"
+  ]
+}
