@@ -1,0 +1,69 @@
+{
+  "actorSpecification": 1,
+  "name": "linkedin-profile-scraper",
+  "title": "LinkedIn Profile Scraper",
+  "description": "Scrape comprehensive LinkedIn profile data including experience, education, skills, and contact information. Fast, reliable, and returns structured JSON data.",
+  "version": "0.0.1",
+  "meta": {
+    "templateId": "python-start"
+  },
+  "input": "./input_schema.json",
+  "dockerfile": "./Dockerfile",
+  "readme": "./README.md",
+  "categories": [
+    "BUSINESS",
+    "MARKETING",
+    "LEAD_GENERATION"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "title": "LinkedIn Profiles",
+      "views": {
+        "overview": {
+          "title": "Overview",
+          "transformation": {
+            "fields": [
+              "basic_info.fullname",
+              "basic_info.headline",
+              "basic_info.location.full",
+              "basic_info.email",
+              "basic_info.connection_count",
+              "basic_info.follower_count",
+              "experience"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "basic_info.fullname": {
+                "label": "Full Name",
+                "format": "text"
+              },
+              "basic_info.headline": {
+                "label": "Headline",
+                "format": "text"
+              },
+              "basic_info.location.full": {
+                "label": "Location",
+                "format": "text"
+              },
+              "basic_info.email": {
+                "label": "Email",
+                "format": "text"
+              },
+              "basic_info.connection_count": {
+                "label": "Connections",
+                "format": "number"
+              },
+              "basic_info.follower_count": {
+                "label": "Followers",
+                "format": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
